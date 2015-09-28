@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491026C71BB3F787008BD09A /* OTMContstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491026C61BB3F787008BD09A /* OTMContstants.swift */; settings = {ASSET_TAGS = (); }; };
+		491026CA1BB3F7E6008BD09A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491026C91BB3F7E6008BD09A /* Config.swift */; settings = {ASSET_TAGS = (); }; };
 		491D741B1BB1722A00EAAA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D741A1BB1722A00EAAA34 /* AppDelegate.swift */; };
-		491D741D1BB1722A00EAAA34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D741C1BB1722A00EAAA34 /* ViewController.swift */; };
 		491D74201BB1722A00EAAA34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491D741E1BB1722A00EAAA34 /* Main.storyboard */; };
 		491D74221BB1722A00EAAA34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D74211BB1722A00EAAA34 /* Assets.xcassets */; };
 		491D74251BB1722A00EAAA34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491D74231BB1722A00EAAA34 /* LaunchScreen.storyboard */; };
 		491D74301BB1722A00EAAA34 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D742F1BB1722A00EAAA34 /* OnTheMapTests.swift */; };
 		491D743B1BB1722A00EAAA34 /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D743A1BB1722A00EAAA34 /* OnTheMapUITests.swift */; };
+		49633D771BB298E400B394BF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49633D761BB298E400B394BF /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		49B86F7A1BB9D9200049753C /* UdacityLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B86F791BB9D9200049753C /* UdacityLogin.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		491026C61BB3F787008BD09A /* OTMContstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMContstants.swift; sourceTree = "<group>"; };
+		491026C91BB3F7E6008BD09A /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		491D74171BB1722A00EAAA34 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		491D741A1BB1722A00EAAA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		491D741C1BB1722A00EAAA34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		491D741F1BB1722A00EAAA34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		491D74211BB1722A00EAAA34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		491D74241BB1722A00EAAA34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 		491D74361BB1722A00EAAA34 /* OnTheMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		491D743A1BB1722A00EAAA34 /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		491D743C1BB1722A00EAAA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49633D761BB298E400B394BF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		49B86F791BB9D9200049753C /* UdacityLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityLogin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		491026C81BB3F78C008BD09A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				491026C61BB3F787008BD09A /* OTMContstants.swift */,
+				491026C91BB3F7E6008BD09A /* Config.swift */,
+				49B86F791BB9D9200049753C /* UdacityLogin.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		491D740E1BB1722A00EAAA34 = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +113,10 @@
 		491D74191BB1722A00EAAA34 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
-				491D741A1BB1722A00EAAA34 /* AppDelegate.swift */,
-				491D741C1BB1722A00EAAA34 /* ViewController.swift */,
 				491D741E1BB1722A00EAAA34 /* Main.storyboard */,
+				491D741A1BB1722A00EAAA34 /* AppDelegate.swift */,
+				491026C81BB3F78C008BD09A /* Model */,
+				491D74481BB1735500EAAA34 /* ViewControllers */,
 				491D74211BB1722A00EAAA34 /* Assets.xcassets */,
 				491D74231BB1722A00EAAA34 /* LaunchScreen.storyboard */,
 				491D74261BB1722A00EAAA34 /* Info.plist */,
@@ -123,6 +140,14 @@
 				491D743C1BB1722A00EAAA34 /* Info.plist */,
 			);
 			path = OnTheMapUITests;
+			sourceTree = "<group>";
+		};
+		491D74481BB1735500EAAA34 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				49633D761BB298E400B394BF /* LoginViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,8 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				491D741D1BB1722A00EAAA34 /* ViewController.swift in Sources */,
+				49B86F7A1BB9D9200049753C /* UdacityLogin.swift in Sources */,
 				491D741B1BB1722A00EAAA34 /* AppDelegate.swift in Sources */,
+				491026CA1BB3F7E6008BD09A /* Config.swift in Sources */,
+				491026C71BB3F787008BD09A /* OTMContstants.swift in Sources */,
+				49633D771BB298E400B394BF /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.firekite.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -410,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.firekite.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -483,6 +513,7 @@
 				491D74411BB1722A00EAAA34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		491D74421BB1722A00EAAA34 /* Build configuration list for PBXNativeTarget "OnTheMapTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +522,7 @@
 				491D74441BB1722A00EAAA34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		491D74451BB1722A00EAAA34 /* Build configuration list for PBXNativeTarget "OnTheMapUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +531,7 @@
 				491D74471BB1722A00EAAA34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
