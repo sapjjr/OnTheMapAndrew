@@ -13,10 +13,10 @@ import UIKit
 
 class OTMConstants: UIResponder, UIApplicationDelegate  {
 
-/* Constants for TheMovieDB */
-let apiKey = "b0d9f9c0c28e29393c8f6d88c2112dc6"//"ENTER_YOUR_API_KEY_HERE"
-let baseURLString = "http://api.themoviedb.org/3/"
-let baseURLSecureString = "https://api.themoviedb.org/3/"
+// Constants
+
+let baseURLString =  "https://www.udacity.com/api/session"
+
 
 /* Need these for login */
 var requestToken: String? = nil
