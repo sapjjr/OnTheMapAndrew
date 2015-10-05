@@ -6,50 +6,61 @@
 //  Copyright © 2015 Firekite. All rights reserved.
 //
 
-import Foundation
-import UIKit
+extension UdacityClient  {
 
-
-
-class OTMConstants: UIResponder, UIApplicationDelegate  {
-
-// Constants
-
-let baseURLString =  "https://www.udacity.com/api/session"
-
-
-/* Need these for login */
-var requestToken: String? = nil
-var sessionID: String? = nil
-var userID: Int? = nil
-
-/* Configuration for TheMovieDB, we'll take care of this for you =)... */
-var config = Config()
-
-
-
-}
-
-extension OTMConstants {
-    
-    /* Helper function: Given a dictionary of parameters, convert to a string for a url */
-    func escapedParameters(parameters: [String : AnyObject]) -> String {
-        
-        var urlVars = [String]()
-        
-        for (key, value) in parameters {
-            
-            /* Make sure that it is a string value */
-            let stringValue = "\(value)"
-            
-            /* Escape it */
-            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            
-            /* Append it */
-            urlVars += [key + "=" + "\(escapedValue!)"]
-            
-        }
-        
-        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
+    struct UdacityAccount {
+        static let UdacitySessionID: String? = "sessionID"
+        // var accountKey: Int? = nil
+        static let UdacityAcountKey: String? = "accountKey"
     }
+
+    struct Constants {
+    
+        static let baseURL : String =  "https://www.udacity.com/api"
+        static let BaseURLStudent : String = "https://api.parse.com/1/classes/StudentLocation"
+        static let PUDURL : String = "https://www.udacity.com/api/users/3903878747"
+        
+        // URL Keys
+        static let ParseAppID: String = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+        static let ParseAPIKey: String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+    }
+    
+    struct Methods {
+        // URL Endings
+        static let UdacitySession: String = "/session"
+        static let FacebookSession: String = "/session"
+        static let UdacityData: String = "/users/"
+        static let UpdatedAt: String = "?order=-updatedAt"
+     //   static let UpdateLocation: String = "/" + Data.sharedInstance().objectID
+    }
+
+    struct JsonConstants {
+        // Udacity General
+        static let Account = "account"
+        static let Results = "results"
+        static let UserID = "key"
+        
+        // Udacity User
+        static let User = "user"
+        static let UserFirstName = "first_name"
+        static let UserLastName = "last_name"
+        
+        // Student Locations
+        static let CreatedAt = "createdAt"
+        static let FirstName = "firstName"
+        static let LastName = "lastName"
+        static let Latitude = "latitude"
+        static let Longitude = "longitude"
+        static let MapString = "mapString"
+        static let MediaURL = "mediaURL"
+        static let ObjectId = "objectId"
+        static let UniqueKey = "uniqueKey"
+        static let UpdatedAt = "updatedAt"
+    }
+
+
 }
+
+
+    
+

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var outletEmail: UITextField!
     @IBOutlet weak var outletPassword: UITextField!
@@ -26,16 +26,20 @@ class LoginViewController: UIViewController {
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0
     
-    
-
+ //   let textDelegate = TextFieldDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         /* Get the app delegate */
-       appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+      // appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         /* Get the shared URL session */
         session = NSURLSession.sharedSession()
         self.configureUI()
+        
+        
+        
+       // self.outletEmail.delegate = textDelegate
+      //  self.outletPassword.delegate = textDelegate
 
     }
 
@@ -88,6 +92,7 @@ class LoginViewController: UIViewController {
             outletError.text = "" //clear the error message
             UdacityClient.sharedInstance().getSessionID(outletEmail.text!, outletPassword: outletPassword.text!, completionHandler: {( success, errorString) in
                 if success {
+                    print("\(self.outletEmail.text!)")
                     dispatch_async(dispatch_get_main_queue(), {
                         self.completeLogin()
                     })
@@ -104,7 +109,10 @@ class LoginViewController: UIViewController {
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.outletError.text = ""
+            self.outletError.text = ""  // clears text
+            self.outletEmail.text = ""
+            self.outletPassword.text = ""
+            
             self.setUIEnabled(enabled: true)
            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
            self.presentViewController(controller, animated: true, completion: nil)
@@ -124,7 +132,10 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func actionSignUp(sender: UIButton) {
+        //opens a web browser at the UDacity signuo area - cool!
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.google.com/url?q=https://www.udacity.com/account/auth%23!/signin&sa=D&usg=AFQjCNHOjlXo3QS15TqT0Bp_TKoR9Dvypw")!)
     }
+    
 
     
     @IBAction func actionFacebookSignIn(sender: AnyObject) {

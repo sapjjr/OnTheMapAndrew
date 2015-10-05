@@ -15,6 +15,7 @@
 		491D74251BB1722A00EAAA34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491D74231BB1722A00EAAA34 /* LaunchScreen.storyboard */; };
 		491D74301BB1722A00EAAA34 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D742F1BB1722A00EAAA34 /* OnTheMapTests.swift */; };
 		491D743B1BB1722A00EAAA34 /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D743A1BB1722A00EAAA34 /* OnTheMapUITests.swift */; };
+		492EB1E31BBEC69300A313A7 /* StudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EB1E21BBEC69300A313A7 /* StudentData.swift */; settings = {ASSET_TAGS = (); }; };
 		49633D771BB298E400B394BF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49633D761BB298E400B394BF /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		496F50031BBC19C600EED8E6 /* OTMConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F50021BBC19C600EED8E6 /* OTMConvenience.swift */; settings = {ASSET_TAGS = (); }; };
 		496F50051BBC4BD100EED8E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F50041BBC4BD100EED8E6 /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -22,6 +23,7 @@
 		496F50091BBC4C9300EED8E6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F50081BBC4C9300EED8E6 /* WebViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		496F500B1BBC4CA300EED8E6 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F500A1BBC4CA300EED8E6 /* PostViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		49B86F7A1BB9D9200049753C /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B86F791BB9D9200049753C /* UdacityClient.swift */; settings = {ASSET_TAGS = (); }; };
+		49EF33561BC1CEF600EB002B /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EF33551BC1CEF600EB002B /* TextFieldDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 		491D74361BB1722A00EAAA34 /* OnTheMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		491D743A1BB1722A00EAAA34 /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		491D743C1BB1722A00EAAA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		492EB1E21BBEC69300A313A7 /* StudentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentData.swift; sourceTree = "<group>"; };
 		49633D761BB298E400B394BF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		496F50011BBC074400EED8E6 /* Loginv1VC.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Loginv1VC.playground; sourceTree = "<group>"; };
 		496F50021BBC19C600EED8E6 /* OTMConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConvenience.swift; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 		496F50081BBC4C9300EED8E6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		496F500A1BBC4CA300EED8E6 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		49B86F791BB9D9200049753C /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		49EF33551BC1CEF600EB002B /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +98,12 @@
 		491026C81BB3F78C008BD09A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				491026C91BB3F7E6008BD09A /* Config.swift */,
+				49B86F791BB9D9200049753C /* UdacityClient.swift */,
 				491026C61BB3F787008BD09A /* OTMContstants.swift */,
 				496F50021BBC19C600EED8E6 /* OTMConvenience.swift */,
-				49B86F791BB9D9200049753C /* UdacityClient.swift */,
+				491026C91BB3F7E6008BD09A /* Config.swift */,
+				492EB1E21BBEC69300A313A7 /* StudentData.swift */,
+				49EF33551BC1CEF600EB002B /* TextFieldDelegate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -308,10 +314,12 @@
 			files = (
 				49B86F7A1BB9D9200049753C /* UdacityClient.swift in Sources */,
 				496F50091BBC4C9300EED8E6 /* WebViewController.swift in Sources */,
+				49EF33561BC1CEF600EB002B /* TextFieldDelegate.swift in Sources */,
 				491D741B1BB1722A00EAAA34 /* AppDelegate.swift in Sources */,
 				491026CA1BB3F7E6008BD09A /* Config.swift in Sources */,
 				496F500B1BBC4CA300EED8E6 /* PostViewController.swift in Sources */,
 				491026C71BB3F787008BD09A /* OTMContstants.swift in Sources */,
+				492EB1E31BBEC69300A313A7 /* StudentData.swift in Sources */,
 				496F50031BBC19C600EED8E6 /* OTMConvenience.swift in Sources */,
 				49633D771BB298E400B394BF /* LoginViewController.swift in Sources */,
 				496F50071BBC4BE900EED8E6 /* ListViewController.swift in Sources */,

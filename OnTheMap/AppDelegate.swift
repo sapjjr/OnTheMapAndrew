@@ -17,12 +17,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-//COnstants for Udacity:
-    
-    
-   // var requestToken: String? = nil
-    var sessionID: String? = nil
-   // var userID: Int? = nil
 
     
 

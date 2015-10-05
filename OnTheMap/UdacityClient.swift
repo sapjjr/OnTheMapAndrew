@@ -10,167 +10,99 @@ import UIKit
 
 
 class UdacityClient: NSObject{
-   
     
-    var appDelegate: AppDelegate!
-    var session: NSURLSession!
-   // var outletEmail = "andrew.park@ntlworld.com"
-   // var outletPassword = "jessica307"
-    var sessionID: String = ""
-    //outletEmail :String, _ outletPassword: String
-    let BaseURL: String = "https://www.udacity.com/api/session"
-    let PUDURL: String = "https://www.udacity.com/api/users/3903878747"
+    // Shared session
+    var session: NSURLSession
+    
+    override init() {
+        session = NSURLSession.sharedSession()
+        super.init()
+    }
+    
+    let baseURL: String = Constants.baseURL
+    //let BaseURL: String = "https://www.udacity.com/api/session"
+    let PUDURL: String = Constants.PUDURL
         //Public User Data URL
     
-
-    
-    
-    func getSessionID(outletEmail: String, outletPassword: String, completionHandler: (success: Bool, errorString: String?) -> Void) -> String {
-
+    func getSessionID(outletEmail: String, outletPassword: String, completionHandler: (success: Bool, errorString: String?) -> Void)  {
+        // variables
         
-        let request = NSMutableURLRequest(URL: NSURL(string: BaseURL)!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(outletEmail)\", \"password\": \"\(outletPassword)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        //print("\(outletEmail.text)","\(outletPassword.text)")
+        let parameters = [String: AnyObject]()
+        let baseURL = Constants.baseURL
+        let method = Methods.UdacitySession
+        let jsonBody = ["udacity": ["username": outletEmail, "password" : outletPassword]]
+        
+        
+        self.udacityPOSTMethod(parameters, baseURL: baseURL, method: method, jsonBody: jsonBody) { result, error in
+                // Send the desired value(s) to completion handler
+                if let error = error {
+                    completionHandler(success: false, errorString: "Please check your network connection and try again.\(error)")
+                } else {
+                    if let resultDictionary = result.valueForKey(UdacityClient.JsonConstants.Account) as? NSDictionary {
+                        if let userID = resultDictionary.valueForKey(UdacityClient.JsonConstants.UserID) as? String {
+                            NSUserDefaults.standardUserDefaults().setObject(userID, forKey: "UdacityUserID")
+                            completionHandler(success: true, errorString: "successful")
+                        }
+                    } else {
+                        completionHandler(success: false, errorString: "Username or password is incorrect.")
+                        print("Could not find \(JsonConstants.Account) in \(result)")
+                    }
+                }
+        }
+    }
 
-        let session = NSURLSession.sharedSession()
-
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            guard(error == nil) else {
-                dispatch_async(dispatch_get_main_queue()) {
-   //                 self.setUIEnabled(enabled: true)
-   //                 self.outletError.text = "Login Failed (Request Token)."
-                }
-                completionHandler(success: false, errorString: "There was an error with your request: \(error)")
-                print("There was an error with your request: \(error)")
-                return
-            }
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                dispatch_async(dispatch_get_main_queue()) {
-                }
-                if let response = response as? NSHTTPURLResponse {
-                    completionHandler(success: false, errorString: "Your request returned an invalid response! Status code: \(response.statusCode)!")
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
-                }
-                return
-            }
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                dispatch_async(dispatch_get_main_queue()) {
-                }
-                completionHandler(success: false, errorString: "No data was returned by the request!")
-                print("No data was returned by the request!")
-                return
-            }
-            // Parse the Data
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments) as! NSDictionary// converts raw data to a foundation object  needs to be converted to an NSDictioary (Udacity 2.9)
-
-                // print(parsedResult["account"]!)
-                /*
-                Optional({
-                key = u31487963;
-                registered = 1;
-                })
-                */
-                //print(parsedResult["session"]!)
-                /*
-                Optional({
-                expiration = "2015-11-27T18:26:28.081520Z";
-                id = 1475000788Sb52cc09ae89b6d54970c276e6f6fbac0;
-                })
-                */
-                //  print (parsedResult.valueForKey("session")!) // is a tuple
-                /*
-                {
-                expiration = "2015-11-27T18:26:28.081520Z";
-                id = 1475000788Sb52cc09ae89b6d54970c276e6f6fbac0;
-                }
-                */
-                //  print (parsedResult.valueForKey("session")!["id"]!)
-                /*
-                Optional(1475000788Sb52cc09ae89b6d54970c276e6f6fbac0)
-                */
-                //let session_ID = parsedResult.valueForKey("session")!["id"]! as! String
-                // print(session_ID) // this would give just the id
-                
-            } catch {
-                parsedResult = nil
-                dispatch_async(dispatch_get_main_queue()) {
-                }
-                completionHandler(success: false, errorString: "Could not parse the data as JSON: '\(newData)'")
-                print("Could not parse the data as JSON: '\(newData)'")
-                return
-            }
-            
-            /* GUARD: Did  return an error? */
-            guard (parsedResult.objectForKey("status_code") == nil) else {
-                dispatch_async(dispatch_get_main_queue()) {
-                }
-                completionHandler(success: false, errorString: "Udacity returned an error. See the status_code and status_message in \(parsedResult)")
-                print("Udacity returned an error. See the status_code and status_message in \(parsedResult)")
-                return
-            }
-            
-            /* GUARD: Is the sessionID in parsedResult? */
-            guard let sessionID = parsedResult.valueForKey("session")!["id"]! as! String! else {
-                dispatch_async(dispatch_get_main_queue()) {
-                }
-                completionHandler(success: false, errorString: "Cannot find sessionID in \(parsedResult)")
-                print("Cannot find sessionID in \(parsedResult)")
-                return
-            }
-            
-            /* 6. Use the data! */
-            completionHandler(success: true, errorString: "successful")
-            print("This is the sessionID   \(sessionID)")
-            
-            
-            /* Get the app delegate */
-            self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            self.appDelegate.sessionID = sessionID
+    
+    func udacityLogout(completionHandler: (success: Bool, error: String?) -> Void) {
+        
+        
+        
+        // Build URL & configure Request
+        let request = NSMutableURLRequest(URL: NSURL(string: Constants.baseURL)!)
+        request.HTTPMethod = "DELETE"
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies as [NSHTTPCookie]! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         
-        /* 7. Start the request */
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error…
+                return
+            }
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+        }// Make Request
         task.resume()
-        return sessionID
+    }
+  
+    
+    
+    /* Helper function: Given a dictionary of parameters, convert to a string for a url */
+    func escapedParameters(parameters: [String : AnyObject]) -> String {
         
+        var urlVars = [String]()
         
+        for (key, value) in parameters {
+            
+            /* Make sure that it is a string value */
+            let stringValue = "\(value)"
+            
+            /* Escape it */
+            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            
+            /* Append it */
+            urlVars += [key + "=" + "\(escapedValue!)"]
+            
+        }
         
-        //  (NSString(data: data!, encoding: NSUTF8StringEncoding)!) as Dictionary
+        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
         
     }
-    
-    /* example response
-    {
-    "account":{
-    "registered":true,
-    "key":"3903878747"
-    },
-    "session":{
-    "id":"1457628510Sc18f2ad4cd3fb317fb8e028488694088",
-    "expiration":"2015-05-10T16:48:30.760460Z"
-    }
-    }
-    with hardcoded get: 
-    
-    Optional({
-    "account": {
-    "registered": true, 
-    "key": "u31487963"}, 
-    "session": {
-    "id": "1474809878S4ebd10b9499a7a6804b0120c50266403", 
-    "expiration": "2015-11-25T13:24:38.737750Z"}})
-    */
-    
-// Mark sharedinstance
-// This way saves memory apparently? it is astatic constant of a nested struct as a class constant -  no explanation in course!
+
     class func sharedInstance() -> UdacityClient {
         
         struct Singleton {
@@ -179,8 +111,4 @@ class UdacityClient: NSObject{
         
         return Singleton.sharedInstance
     }
-    
-    
-    
-    
 }
