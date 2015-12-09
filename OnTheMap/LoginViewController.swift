@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    var appDelegate: AppDelegate!
+   // var appDelegate: AppDelegate!
     var session: NSURLSession!
     // keyboard functionality
     var backgroundGradient: CAGradientLayer? = nil
@@ -90,21 +90,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else {
             self.setUIEnabled(enabled: false)
             outletError.text = "" //clear the error message
-            UdacityClient.sharedInstance().getSessionID(outletEmail.text!, outletPassword: outletPassword.text!, completionHandler: {( success, errorString) in
+            UdacityClient.sharedInstance.getSessionID(outletEmail.text!, outletPassword: outletPassword.text!, completionHandler: {( success, errorString) in
                 if success {
-                    print("\(self.outletEmail.text!)")
+                    print(" LoginVC line 90   successful login \(self.outletEmail.text!)")
                     dispatch_async(dispatch_get_main_queue(), {
                         self.completeLogin()
                     })
                 } else {
+                    print(" LoginVC line 100   No successful login \(self.outletEmail.text!)")
                     dispatch_async(dispatch_get_main_queue(), {
                         self.alert_message("Alert", messagem:   "\(errorString!)",  clickm: "Click")
                         //self.displayError(errorString)
                         self.setUIEnabled(enabled: true)
                     })
                 }
-            })
-        }}
+                })
+            }
+    } //1
     
     
     func completeLogin() {
@@ -112,11 +114,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.outletError.text = ""  // clears text
             self.outletEmail.text = ""
             self.outletPassword.text = ""
-            
+            print("CompletedLogin")
             self.setUIEnabled(enabled: true)
            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
            self.presentViewController(controller, animated: true, completion: nil)
         })
+
     }
     
    

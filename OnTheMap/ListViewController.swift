@@ -8,40 +8,59 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var barButtonLogout: UIBarButtonItem!
     @IBOutlet var barButtonRefresh: UIBarButtonItem!
-    
     @IBOutlet var barButtonClose: UIBarButtonItem!
-    @IBOutlet weak var listView: UITableView!
+   @IBOutlet weak var listView: UITableView!
     
-    
-    
-    
+    var delegate = self
+
+ //   let students : [StudentData] = UdacityClient.sharedInstance.students
+    var students : [StudentData] = UdacityClient.sharedInstance.students
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //set up bar buttons
-     //navigationItem.leftBarButtonItem = barButtonClose
-     navigationItem.leftBarButtonItem = barButtonLogout
-    
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+      //   dispatch_async(dispatch_get_main_queue() ) {
+        UdacityClient.sharedInstance.GetLocations() { success, error in
+            
+            if success {
+               
+                self.students = UdacityClient.sharedInstance.students
+                print ("Success from ViewDidLoad  \(error ) -- \(UdacityClient.sharedInstance.students.count)")
+                print ("Success  ---1--  -- \(UdacityClient.sharedInstance.students[1])")
+                      print ("         ---1--  -- ")
+                      print ("         ---1-- last name -- \(UdacityClient.sharedInstance.students[1].lastName)")
+                      print ("         ---1--  students.count --- \(self.students[1].firstName)")
+                
+                
+                print("ListView--  self.students.count-- \(self.students.count)  -UdacityClient.sharedInstance.students --  \(UdacityClient.sharedInstance.students.count)")
+                
+                //self.students  = UdacityClient.sharedInstance.students
+                
+            } else {
+                print ("Failure from ViewDidLoad \(error ) -- \(UdacityClient.sharedInstance.students.count) ")
+            
+        }
         
-        // Loads tableView data.
-      //  listView.reloadData()
+                 }
+     //   }
+        //set up bar buttons
+     navigationItem.leftBarButtonItem = barButtonLogout
+    //self.navigationItem.setRightBarButtonItems([refreshButton, postButton], animated: true)
+        // Connect the table to the student data source
+        
+        self.listView!.dataSource = self
+        self.listView.delegate = self
+        
     }
+    
+    
 
-    
-    
-    
-    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,18 +73,19 @@ class ListViewController: UIViewController {
     }
     
     @IBAction func barButtonLogout(sender: AnyObject) {
-        UdacityClient.sharedInstance().udacityLogout { (success: Bool, error: String?) -> Void in
-            if success {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            } else {
-                self.alert_message("Could not log out", messagem:   "Please check your network connection and try again.",  clickm: "Click")
-            }
+        UdacityClient.sharedInstance.udacityLogOutMethod { (result: Bool, error: String?) -> Void in
+        if result {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+        self.alert_message("Could not log out", messagem: "Please check your network connection and try again.", clickm: "Click")
+    
+        }
         }
     }
-
+   
 
 // tidyup of alert - would be better in somewhere it can be better shared - but not sure how
-func alert_message( alertm: String, messagem:  String, clickm: String)  {
+func alert_message(alertm: String, messagem:  String, clickm: String)  {
     // manages the alert messages on a separate thread
     dispatch_async(dispatch_get_main_queue(), {
         let alert = UIAlertController(title: alertm, message: messagem, preferredStyle: UIAlertControllerStyle.Alert)
@@ -74,52 +94,88 @@ func alert_message( alertm: String, messagem:  String, clickm: String)  {
     })
 }
 
-    
-    
-    
-    // MARK: - TableView Methods
-    
+    //  TableView Methods-----------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------
+
     // Set up tableView cells.
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+            //let  location    = self.students[indexPath.row]
+       let location    = UdacityClient.sharedInstance.students[indexPath.row]
+
+        print ("location  \(location)")
         
-        let cellReuseIdentifier = "StudentList"
-        let location = Data.sharedInstance().locations[indexPath.row]
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
+        let cell    =  tableView.dequeueReusableCellWithIdentifier("StudentListViewCell") as UITableViewCell!
         
         let firstName = location.firstName
         let lastName = location.lastName
         let mediaURL = location.mediaURL
         
-        cell.textLabel!.text = "\(firstName) \(lastName)"
-        cell.detailTextLabel?.text = mediaURL
+       // cell!.textLabel!.text = "\(location.firstName) \(location.lastName)"
         
-        cell.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
+            cell!.textLabel!
+         cell!.textLabel!.text = "\(firstName) \(lastName)"
+         cell!.detailTextLabel?.text = mediaURL
         
+         cell!.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        print ("cell details \(firstName) \(lastName) \(mediaURL)")
+
+       
         return cell
     }
-    
-    // Retrieves number of rows.
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Data.sharedInstance().locations == nil {
-            self.getStudentLocations()
-        }
-        return Data.sharedInstance().locations.count
-    }
-    
-    */
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+
+    // Retrieves number of rows.
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        print("ListView-- students.count  --- \(students.count) ------  self.students.count-- \(self.students.count)  -UdacityClient.sharedInstance.students --  \(UdacityClient.sharedInstance.students.count)")
+
+        
+        
+         return UdacityClient.sharedInstance.students.count
+        //    return self.students.count
+        
     }
-    */
+
+    
+    // Displays error message alert view.
+    func displayError(title: String, errorString: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            let alertController = UIAlertController(title: title, message: errorString, preferredStyle: .Alert)
+            let okAction = UIAlertAction (title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    // Displays error message alert view with completion handler.
+    func displayErrorWithHandler(title: String, errorString: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            let alertController = UIAlertController(title: title, message: errorString, preferredStyle: .Alert)
+            let okAction = UIAlertAction (title: "OK", style: UIAlertActionStyle.Default) { (action) in
+                //let storyboard = self.storyboard
+                let controller = self.storyboard?.instantiateViewControllerWithIdentifier("Post View") as! PostViewController
+                
+                self.presentViewController(controller, animated: true, completion: nil)
+            }
+            let cancelAction = UIAlertAction (title: "Cancel", style: UIAlertActionStyle.Destructive, handler: nil)
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
