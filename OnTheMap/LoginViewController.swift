@@ -141,8 +141,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
 
     
-    @IBAction func actionFacebookSignIn(sender: AnyObject) {
-        }
+
 
     }
     

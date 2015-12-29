@@ -17,49 +17,28 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var delegate = self
 
- //   let students : [StudentData] = UdacityClient.sharedInstance.students
-    var students : [StudentData] = UdacityClient.sharedInstance.students
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //   dispatch_async(dispatch_get_main_queue() ) {
-        UdacityClient.sharedInstance.GetLocations() { success, error in
-            
-            if success {
-               
-                self.students = UdacityClient.sharedInstance.students
-                print ("Success from ViewDidLoad  \(error ) -- \(UdacityClient.sharedInstance.students.count)")
-                print ("Success  ---1--  -- \(UdacityClient.sharedInstance.students[1])")
-                      print ("         ---1--  -- ")
-                      print ("         ---1-- last name -- \(UdacityClient.sharedInstance.students[1].lastName)")
-                      print ("         ---1--  students.count --- \(self.students[1].firstName)")
-                
-                
-                print("ListView--  self.students.count-- \(self.students.count)  -UdacityClient.sharedInstance.students --  \(UdacityClient.sharedInstance.students.count)")
-                
-                //self.students  = UdacityClient.sharedInstance.students
-                
-            } else {
-                print ("Failure from ViewDidLoad \(error ) -- \(UdacityClient.sharedInstance.students.count) ")
-            
-        }
-        
-                 }
+       
+       
      //   }
         //set up bar buttons
      navigationItem.leftBarButtonItem = barButtonLogout
     //self.navigationItem.setRightBarButtonItems([refreshButton, postButton], animated: true)
         // Connect the table to the student data source
         
-        self.listView!.dataSource = self
-        self.listView.delegate = self
+     //   self.listView!.dataSource = self
+      //  self.listView.delegate = self
         
+    }  //x2
+    
+    
+     func viewWillAppear() {
+        listView.reloadData()
     }
-    
-    
-
 
     
     override func didReceiveMemoryWarning() {
@@ -72,7 +51,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func barButtonLogout(sender: AnyObject) {
+    @IBAction func barButtonLogout(sender: AnyObject) {  //xx1
         UdacityClient.sharedInstance.udacityLogOutMethod { (result: Bool, error: String?) -> Void in
         if result {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -81,39 +60,42 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         }
         }
-    }
+    }  //xx1
    
 
 // tidyup of alert - would be better in somewhere it can be better shared - but not sure how
-func alert_message(alertm: String, messagem:  String, clickm: String)  {
+func alert_message(alertm: String, messagem:  String, clickm: String)  { //xxx1
     // manages the alert messages on a separate thread
     dispatch_async(dispatch_get_main_queue(), {
         let alert = UIAlertController(title: alertm, message: messagem, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: clickm, style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     })
-}
+}  //xxx1
 
     //  TableView Methods-----------------------------------------------------------------
     //-------------------------------------------------------------------------------------------
 
     // Set up tableView cells.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+ 
+        
+        
+        // print("UdacityClient.sharedInstance.students.count) and (self.students.count)-- \(UdacityClient.sharedInstance.students.count) ")
+        
+       let student    = UdacityClient.sharedInstance.students[indexPath.row]
+        
+        //UdacityClient.sharedInstance.students[indexPath.row]
 
-            //let  location    = self.students[indexPath.row]
-       let location    = UdacityClient.sharedInstance.students[indexPath.row]
-
-        print ("location  \(location)")
+        print ("student  \(student)")
         
         let cell    =  tableView.dequeueReusableCellWithIdentifier("StudentListViewCell") as UITableViewCell!
         
-        let firstName = location.firstName
-        let lastName = location.lastName
-        let mediaURL = location.mediaURL
+        let firstName = student.firstName
+        let lastName = student.lastName
+        let mediaURL = student.mediaURL
         
-       // cell!.textLabel!.text = "\(location.firstName) \(location.lastName)"
-        
-            cell!.textLabel!
+         //cell!.textLabel!
          cell!.textLabel!.text = "\(firstName) \(lastName)"
          cell!.detailTextLabel?.text = mediaURL
         
@@ -129,15 +111,19 @@ func alert_message(alertm: String, messagem:  String, clickm: String)  {
     // Retrieves number of rows.
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        print("ListView-- students.count  --- \(students.count) ------  self.students.count-- \(self.students.count)  -UdacityClient.sharedInstance.students --  \(UdacityClient.sharedInstance.students.count)")
+       //print("ListView-- students.count  --- \(students.count) ------  self.students.count-- \(self.students.count)  -UdacityClient.sharedInstance.students --  \(UdacityClient.sharedInstance.students.count)")
+       print("  UdacityClient.sharedInstance.students.count    \(UdacityClient.sharedInstance.students.count)")
 
+            return UdacityClient.sharedInstance.students.count//self.students.count
         
-        
-         return UdacityClient.sharedInstance.students.count
-        //    return self.students.count
-        
+
     }
 
+    
+    
+    
+    
+    
     
     // Displays error message alert view.
     func displayError(title: String, errorString: String) {
