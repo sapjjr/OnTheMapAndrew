@@ -10,7 +10,6 @@ import UIKit
 import Foundation
 import MapKit
 
-
 extension UdacityClient{
 
     func GetLocations(completionHandler: (success: Bool, error: NSError?) -> () ) {
@@ -61,7 +60,7 @@ extension UdacityClient{
                 for loc in locations {
                     
                     students.append(StudentData(dictionary: loc))
-                    print("Data being added to students \(loc)")
+                   // print("Data being added to students \(loc)")
                 }
             } else {
                 // Error getting the dictionary from JSON data
@@ -71,7 +70,7 @@ extension UdacityClient{
         } catch {
             completionHandler(success: false, errorString: "Could not parse data")
         }
-        print ("students after append     \(students)")
+        //print ("students after append     \(students)")
         // Return successful
         completionHandler(success: true, errorString: nil)
         
@@ -82,10 +81,12 @@ extension UdacityClient{
         let locations = UdacityClient.sharedInstance.students
         var annotations = [MKAnnotation]()
         for student in locations {
-            annotations.append(student.annotation)
+            annotations.append(student.annotations)
         }
         return annotations
     }
+    
+
     
     
     

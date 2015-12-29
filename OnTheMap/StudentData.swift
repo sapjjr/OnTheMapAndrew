@@ -20,7 +20,7 @@ struct StudentData {
     var uniqueKey : String//= ""
     var updatedAt : String//= ""
     
-    let annotation = MKPointAnnotation()
+    let annotations = MKPointAnnotation()
     
     //Location from  dictionary
     init(dictionary: NSDictionary) {
@@ -39,11 +39,12 @@ struct StudentData {
     func setAnnotation(data: NSDictionary) {
         let lat = CLLocationDegrees(data["latitude"] as! Double)
         let long = CLLocationDegrees(data["longitude"] as! Double)
-        annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        annotation.title = "\(firstName) \(lastName)"
-        annotation.subtitle = mediaURL
+        
+        annotations.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        annotations.title = "\(firstName) \(lastName)"
+        annotations.subtitle = mediaURL
     }
-    
+   
 
 }
 

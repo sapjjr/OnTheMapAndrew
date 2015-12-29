@@ -232,8 +232,81 @@
                     <view key="view" contentMode="scaleToFill" id="Scy-Ga-BBy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQS-ji-RjT" userLabel="Top View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="160"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRb-cn-RQO">
+                                        <rect key="frame" x="225" y="22" width="150" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="9rt-hl-Fag"/>
+                                            <constraint firstAttribute="height" constant="120" id="pLt-kM-rtE"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Where are you studying today?">
+                                                <attributes>
+                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <font key="NSFont" size="22" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="CRb-cn-RQO" firstAttribute="centerX" secondItem="KQS-ji-RjT" secondAttribute="centerX" id="Sas-xg-HuL"/>
+                                    <constraint firstItem="CRb-cn-RQO" firstAttribute="centerY" secondItem="KQS-ji-RjT" secondAttribute="centerY" constant="2" id="URn-GS-Dfn"/>
+                                    <constraint firstAttribute="height" constant="160" id="xbJ-sv-KuY"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MP3-Tb-geK">
+                                <rect key="frame" x="0.0" y="472" width="600" height="130"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MC4-Ig-c6h">
+                                        <rect key="frame" x="230" y="47" width="140" height="35"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="KQ4-9L-bPf"/>
+                                            <constraint firstAttribute="height" constant="35" id="gj8-SM-xPK"/>
+                                        </constraints>
+                                        <state key="normal" title="Find on the Map"/>
+                                        <connections>
+                                            <action selector="findButton:" destination="s8r-3i-Awq" eventType="touchUpInside" id="elW-JD-spu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="MC4-Ig-c6h" firstAttribute="centerX" secondItem="MP3-Tb-geK" secondAttribute="centerX" id="26a-2Q-dOe"/>
+                                    <constraint firstItem="MC4-Ig-c6h" firstAttribute="top" secondItem="MP3-Tb-geK" secondAttribute="top" constant="47" id="gpp-iz-yjv"/>
+                                    <constraint firstAttribute="height" constant="130" id="uLD-KR-WBg"/>
+                                </constraints>
+                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-nd-Xhg">
+                                <rect key="frame" x="0.0" y="159" width="600" height="441"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BPT-nd-Xhg" firstAttribute="top" secondItem="rux-G9-0tq" secondAttribute="bottom" constant="139" id="89R-Sn-Tpq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KQS-ji-RjT" secondAttribute="trailing" constant="-20" id="AoE-N0-7uq"/>
+                            <constraint firstItem="BPT-nd-Xhg" firstAttribute="bottom" secondItem="QG4-JN-Ijq" secondAttribute="top" id="GWy-c8-Eau"/>
+                            <constraint firstItem="KQS-ji-RjT" firstAttribute="leading" secondItem="Scy-Ga-BBy" secondAttribute="leadingMargin" constant="-20" id="OJP-6y-u32"/>
+                            <constraint firstItem="BPT-nd-Xhg" firstAttribute="leading" secondItem="MP3-Tb-geK" secondAttribute="leading" id="ZgQ-JP-fRn"/>
+                            <constraint firstItem="KQS-ji-RjT" firstAttribute="top" secondItem="Scy-Ga-BBy" secondAttribute="topMargin" id="enm-7Y-Na1"/>
+                            <constraint firstItem="MP3-Tb-geK" firstAttribute="leading" secondItem="Scy-Ga-BBy" secondAttribute="leadingMargin" constant="-20" id="jK5-iz-bCw"/>
+                            <constraint firstItem="BPT-nd-Xhg" firstAttribute="trailing" secondItem="MP3-Tb-geK" secondAttribute="trailing" id="mVd-w7-rPr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MP3-Tb-geK" secondAttribute="trailing" constant="-20" id="u5O-sP-oqm"/>
+                            <constraint firstItem="QG4-JN-Ijq" firstAttribute="top" secondItem="MP3-Tb-geK" secondAttribute="bottom" constant="-2" id="xqq-hy-LxP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bottomView" destination="MP3-Tb-geK" id="oOz-ey-ZtO"/>
+                        <outlet property="mapView" destination="BPT-nd-Xhg" id="565-kN-OyV"/>
+                        <outlet property="topView" destination="KQS-ji-RjT" id="47i-Gg-HIk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74I-Tk-k49" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,18 +410,28 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map (List View)" id="Vw5-6I-3GP"/>
                     <connections>
+                        <outlet property="barButtonClose" destination="KVW-Fr-cHC" id="mSM-6k-S5b"/>
+                        <outlet property="barButtonLogout" destination="vaC-EC-ipt" id="KsB-RL-5vR"/>
+                        <outlet property="barButtonRefresh" destination="nck-8a-cU1" id="Dni-8H-2tL"/>
                         <outlet property="listView" destination="3tj-T8-etQ" id="VQ1-Ee-yYi"/>
+                        <outlet property="postButton" destination="aRt-st-7yl" id="hF0-aS-dEd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uha-ac-Gzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarItem title="Item" id="Baq-Cz-4pr" userLabel="barButtonLogout"/>
+                <barButtonItem image="pin" id="aRt-st-7yl"/>
+                <barButtonItem image="refresh" id="nck-8a-cU1"/>
+                <barButtonItem image="close" id="KVW-Fr-cHC"/>
+                <barButtonItem title="LogOut" id="vaC-EC-ipt"/>
             </objects>
             <point key="canvasLocation" x="1802" y="1157"/>
         </scene>
     </scenes>
     <resources>
+        <image name="close" width="32" height="32"/>
         <image name="list" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
+        <image name="pin" width="32" height="32"/>
+        <image name="refresh" width="18" height="22"/>
         <image name="udacity" width="256" height="256"/>
     </resources>
 </document>

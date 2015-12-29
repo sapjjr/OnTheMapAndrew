@@ -7,9 +7,22 @@
 //
 
 import UIKit
+import MapKit
 
 class PostViewController: UIViewController {
 
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
+    
+    
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +34,20 @@ class PostViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    // Mark Actions
+    
+    
+    @IBAction func findButton(sender: AnyObject) {
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 

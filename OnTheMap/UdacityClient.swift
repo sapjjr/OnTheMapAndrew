@@ -19,7 +19,7 @@ class UdacityClient: NSObject{
     var session: NSURLSession
     var sessionID : String? = nil
     var userID : Int? = nil
-   
+  //  var annotations = [MKPointAnnotation]()
     
     override init() {
         session = NSURLSession.sharedSession()

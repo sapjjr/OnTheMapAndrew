@@ -15,6 +15,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var barButtonClose: UIBarButtonItem!
    @IBOutlet weak var listView: UITableView!
     
+    @IBOutlet var postButton: UIBarButtonItem!
+
     var delegate = self
 
     
@@ -27,11 +29,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
      //   }
         //set up bar buttons
      navigationItem.leftBarButtonItem = barButtonLogout
-    //self.navigationItem.setRightBarButtonItems([refreshButton, postButton], animated: true)
+    self.navigationItem.setRightBarButtonItems([barButtonRefresh, postButton], animated: true)
         // Connect the table to the student data source
         
-     //   self.listView!.dataSource = self
-      //  self.listView.delegate = self
+        self.listView!.dataSource = self
+        self.listView.delegate = self
         
     }  //x2
     
@@ -78,14 +80,9 @@ func alert_message(alertm: String, messagem:  String, clickm: String)  { //xxx1
 
     // Set up tableView cells.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
- 
-        
-        
-        // print("UdacityClient.sharedInstance.students.count) and (self.students.count)-- \(UdacityClient.sharedInstance.students.count) ")
         
        let student    = UdacityClient.sharedInstance.students[indexPath.row]
-        
-        //UdacityClient.sharedInstance.students[indexPath.row]
+
 
         print ("student  \(student)")
         
@@ -111,10 +108,9 @@ func alert_message(alertm: String, messagem:  String, clickm: String)  { //xxx1
     // Retrieves number of rows.
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-       //print("ListView-- students.count  --- \(students.count) ------  self.students.count-- \(self.students.count)  -UdacityClient.sharedInstance.students --  \(UdacityClient.sharedInstance.students.count)")
-       print("  UdacityClient.sharedInstance.students.count    \(UdacityClient.sharedInstance.students.count)")
+    //   print("  UdacityClient.sharedInstance.students.count    \(UdacityClient.sharedInstance.students.count)")
 
-            return UdacityClient.sharedInstance.students.count//self.students.count
+            return UdacityClient.sharedInstance.students.count
         
 
     }
