@@ -84,7 +84,7 @@ func alert_message(alertm: String, messagem:  String, clickm: String)  { //xxx1
        let student    = UdacityClient.sharedInstance.students[indexPath.row]
 
 
-        print ("student  \(student)")
+      //  print ("student  \(student)")
         
         let cell    =  tableView.dequeueReusableCellWithIdentifier("StudentListViewCell") as UITableViewCell!
         

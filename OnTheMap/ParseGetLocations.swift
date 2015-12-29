@@ -16,7 +16,7 @@ extension UdacityClient{
         // let parameters = [String: AnyObject]()
         
         let urlString = Constants.baseURLStudent +  Methods.StudentLocation //+ escapedParameters(parameters)
-        print("GetLocations ---urlString  ---\(urlString)       ----")
+       // print("GetLocations ---urlString  ---\(urlString)       ----")
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         
@@ -80,18 +80,35 @@ extension UdacityClient{
     func studentAnnotations() -> [MKAnnotation] {
         let locations = UdacityClient.sharedInstance.students
         var annotations = [MKAnnotation]()
-        for student in locations {
-            annotations.append(student.annotations)
+        for dictionary in locations {
+            
+           let lat = CLLocationDegrees(dictionary.latitude as Double)
+            
+           // let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+            let long = CLLocationDegrees(dictionary.longitude as Double)
+            
+            // The lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
+            let first = dictionary.firstName as String
+            let last = dictionary.lastName as String
+            let mediaURL = dictionary.mediaURL as String
+            
+            // create the annotation and set its properties
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first) \(last)"
+            annotation.subtitle = mediaURL
+            
+            
+            annotations.append(annotation)
+           
         }
-        return annotations
+                return annotations
     }
     
 
-    
-    
-    
-    
-    
+   
     
     
     

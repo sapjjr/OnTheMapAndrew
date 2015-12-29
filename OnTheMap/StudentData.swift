@@ -35,16 +35,7 @@ struct StudentData {
         self.uniqueKey = dictionary["uniqueKey"] as! String
         self.updatedAt = dictionary["updatedAt"] as! String
     }
- 
-    func setAnnotation(data: NSDictionary) {
-        let lat = CLLocationDegrees(data["latitude"] as! Double)
-        let long = CLLocationDegrees(data["longitude"] as! Double)
-        
-        annotations.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        annotations.title = "\(firstName) \(lastName)"
-        annotations.subtitle = mediaURL
-    }
-   
+
 
 }
 
